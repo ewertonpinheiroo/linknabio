@@ -1,7 +1,7 @@
 'use client';
 import { useEffect } from "react";
 
-export default function AbrirWhatsapp(): JSX.Element {
+export default function AbrirWhatsapp() {
   useEffect(() => {
     const timer = setTimeout(() => {
       window.location.href = "https://wa.me/5592993869080"; // Substitua com seu número real
