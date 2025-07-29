@@ -10,7 +10,7 @@ export default function Home() {
     };
 
     if (isWebView()) {
-      // Redireciona para a mesma URL, mas força abertura no navegador padrão
+      // Redireciona para a mesma URL com parâmetro para forçar navegador externo
       window.location.href = 'https://astrologiadequintal.vercel.app/?openExternal=true';
     }
   }, []);
