@@ -58,12 +58,12 @@ export default function PaginaCompleta() {
       {/* Formulário */}
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-lg space-y-4 w-full max-w-md text-center mb-12">
         <h2 className="text-xl font-bold text-[#462209]">
-          Após enviar seus dados, entraremos em contato com você no WhatsApp.
+          Nosso atendimento chegará até você pelo WhatsApp.
         </h2>
 
         {enviado ? (
           <>
-            <p className="text-green-600 font-semibold">Obrigado! Seus dados foram enviados com sucesso.</p>
+            <p className="text-green-600 font-semibold">Tudo certo! Agora é só aguardar o contato do astrólogo Daniel Paiva com mais informações sobre o serviço e os preços.</p>
             <a
               href="https://linktr.ee/astrologiadequintal"
               className="inline-block mt-4 px-6 py-3 bg-[#462209] text-white rounded-xl hover:bg-[#5b2d0f] transition"
