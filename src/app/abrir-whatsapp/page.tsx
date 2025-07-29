@@ -4,11 +4,8 @@ import { useEffect } from 'react';
 export default function AbrirWhatsapp() {
   useEffect(() => {
     const timer = setTimeout(() => {
-      // Simula um clique no link para abrir em uma nova aba
-      const link = document.getElementById('whatsapp-link') as HTMLAnchorElement;
-      if (link) {
-        link.click();
-      }
+      // Usa a Intent URL para forçar a abertura no WhatsApp
+      window.location.href = 'intent://send/+5592993869080#Intent;scheme=whatsapp;package=com.whatsapp;end';
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
@@ -31,7 +28,6 @@ export default function AbrirWhatsapp() {
       <p style={{ color: '#555' }}>
         Se não for redirecionado,{' '}
         <a
-          id="whatsapp-link"
           href="https://wa.me/5592993869080"
           target="_blank"
           rel="noopener noreferrer"
