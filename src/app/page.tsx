@@ -28,8 +28,8 @@ export default function Home() {
         Como acessar o link direto para o WhatsApp
       </h2>
 
-      {/* Player de vídeo automático */}
-      <div className="w-full max-w-xs mb-6 aspect-video">
+      {/* Player de vídeo automático com visualização aumentada */}
+      <div className="w-full max-w-sm sm:max-w-md md:max-w-lg mb-6 aspect-video">
         <iframe
           className="w-full h-full rounded-xl shadow-md"
           src="https://www.youtube.com/embed/10FQ9ctMS0w?si=po2BaiG3aj33kmC2"
@@ -46,14 +46,15 @@ export default function Home() {
       {/* Botão único */}
       <div className="w-full max-w-xs mt-3">
         <LinkButton
-          href="/abrir-whatsapp"
+          href="https://api.whatsapp.com/send/?phone=5592993869080&text&type=phone_number&app_absent=0"
           label="ATENDIMENTO PELO WHATSAPP"
           subtitle="Agende sua consulta"
         />
       </div>
+
       <p className="text-sm text-[#462209] mt-4 text-center px-2">
         ⚠️ O TikTok às vezes bloqueia o link direto pro WhatsApp. <br />
-        Mas relaxa! É rapidinho e super fácil resolver é só seguir o passo a passo no vídeo acima. 😉
+        Mas relaxa! É rapidinho e super fácil resolver, é só seguir o passo a passo no vídeo acima. 😉
       </p>
     </div>
   );
