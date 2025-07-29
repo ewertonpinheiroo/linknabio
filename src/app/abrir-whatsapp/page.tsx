@@ -10,11 +10,11 @@ export default function AbrirWhatsapp() {
 
     const timer = setTimeout(() => {
       if (isWebView()) {
-        // Tenta abrir diretamente o WhatsApp com Intent URL (Android)
-        window.location.href = 'intent://send/+5592993869080#Intent;scheme=whatsapp;package=com.whatsapp;end';
+        // Usa deep link para abrir o WhatsApp diretamente (Android/iOS)
+        window.location.href = 'whatsapp://send?phone=5592993869080';
       } else {
-        // Redireciona normalmente para outros navegadores
-        window.location.href = 'https://wa.me/5592993869080';
+        // Fallback para navegadores normais
+        window.location.href = 'whatsapp://send?phone=5592993869080';
       }
     }, 1500);
 
