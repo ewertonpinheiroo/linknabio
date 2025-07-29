@@ -1,3 +1,4 @@
+'use client';
 import Image from "next/image";
 
 export default function Home() {
@@ -22,28 +23,36 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="w-full max-w-xs flex flex-col gap-4">
-      <LinkButton
-  href="/abrir-whatsapp"
+      {/* Título explicativo */}
+      <h2 className="text-lg text-[#462209] font-semibold mb-2 text-center">
+        Como acessar o link direto para o WhatsApp
+      </h2>
+
+      {/* Player de vídeo automático */}
+      <div className="w-full max-w-xs mb-6 aspect-video">
+        <iframe
+          className="w-full h-full rounded-xl shadow-md"
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&rel=0&modestbranding=1"
+          title="Como acessar o link do WhatsApp"
+          frameBorder="0"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+        ></iframe>
+      </div>
+
+      {/* Botão único */}
+      <div className="w-full max-w-xs">
+       <LinkButton
+  href="https://api.whatsapp.com/send/?phone=5592993869080&text&type=phone_number&app_absent=0"
   label="ATENDIMENTO PELO WHATSAPP"
   subtitle="Agende sua consulta"
 />
-        <LinkButton
-          href="https://www.instagram.com/astrologiadequintal/"
-          label="INSTAGRAM"
-          subtitle="Acompanhe a gente também"
-        />
-        <LinkButton
-          href="https://agriculturaceleste.com"
-          label="SITE DO ASTROLOGIA DE QUINTAL"
-          subtitle="Mais de 500 livros grátis"
-        />
-        <LinkButton
-          href="https://www.youtube.com/@Astrologiadequintal"
-          label="YOUTUBE"
-          subtitle="Acompanhe nosso canal"
-        />
+
       </div>
+      <p className="text-sm text-[#462209] mt-4 text-center px-2">
+  ⚠️ O TikTok às vezes bloqueia o link direto pro WhatsApp. <br />
+  Mas relaxa! É rapidinho e super fácil resolver é só seguir o passo a passo no vídeo acima. 😉
+</p>
     </div>
   );
 }
