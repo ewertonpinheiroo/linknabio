@@ -1,28 +1,29 @@
-"use client";
+'use client';
+import { useEffect } from 'react';
 
-import { useEffect } from "react";
-
-export default function AbrirWhatsapp() {
+export default function RedirecionarWhatsApp() {
   useEffect(() => {
-    const url = "https://api.whatsapp.com/send/?phone=5592993669080&text&type=phone_number&app_absent=0";
+    const redirecionar = () => {
+      // Redireciona após pequeno delay para evitar bloqueio
+      setTimeout(() => {
+        window.location.href = 'https://api.whatsapp.com/send/?phone=5592993669080&text&type=phone_number&app_absent=0';
+      }, 300); 
+    };
 
-    const win = window.open(url, "_blank", "noopener,noreferrer,width=800,height=600");
-
-    if (!win) {
-      window.location.href = url;
-    }
+    redirecionar();
   }, []);
 
   return (
-    <div
-      style={{
-        textAlign: "center",
-        padding: "2rem",
-        fontFamily: "sans-serif",
-        color: "#462209",
-      }}
-    >
-      Redirecionando para o WhatsApp...
+    <div style={{
+      height: '100vh',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column',
+      background: '#f6f6f6',
+      fontFamily: 'sans-serif'
+    }}>
+      <p>Redirecionando para o WhatsApp...</p>
     </div>
   );
 }
