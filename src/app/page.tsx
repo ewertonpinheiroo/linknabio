@@ -28,23 +28,23 @@ export default function Home() {
         Como acessar o link direto para o WhatsApp
       </h2>
 
-      {/* Player de vídeo nativo */}
-      <div className="w-full max-w-xs mb-8 aspect-video">
-        <video
+      {/* Player de vídeo automático */}
+      <div className="w-full max-w-xs mb-6 aspect-video">
+        <iframe
           className="w-full h-full rounded-xl shadow-md"
-          src="/video.mp4"
-          autoPlay
-          muted={false}
-          controls
-          loop
-        />
-        <p className="text-lg text-[#462209] font-semibold mt-2 text-center">
-          Clique no play para assistir ao vídeo! 
+          src="https://www.youtube.com/embed/10FQ9ctMS0w?si=po2BaiG3aj33kmC2"
+          title="Como acessar o link do WhatsApp"
+          frameBorder="0"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+        ></iframe>
+        <p className="text-sm text-[#462209] mt-2 text-center">
+          Clique no play para assistir ao vídeo! 📹
         </p>
       </div>
 
       {/* Botão único */}
-      <div className="w-full max-w-xs mt-4 ">
+      <div className="w-full max-w-xs mt-3">
         <LinkButton
           href="/abrir-whatsapp"
           label="ATENDIMENTO PELO WHATSAPP"
