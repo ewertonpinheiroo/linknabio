@@ -1,52 +1,28 @@
-'use client';
-import { useEffect } from 'react';
+"use client";
+
+import { useEffect } from "react";
 
 export default function AbrirWhatsapp() {
   useEffect(() => {
-    const isWebView = () => {
-      const userAgent = window.navigator.userAgent.toLowerCase();
-      return userAgent.includes('webview') || userAgent.includes('tiktok');
-    };
+    const url = "https://api.whatsapp.com/send/?phone=5592993669080&text&type=phone_number&app_absent=0";
 
-    const timer = setTimeout(() => {
-      if (isWebView()) {
-        // Usa deep link para abrir o WhatsApp diretamente (Android/iOS)
-        window.location.href = 'whatsapp://send?phone=5592993869080';
-      } else {
-        // Fallback para navegadores normais
-        window.location.href = 'whatsapp://send?phone=5592993869080';
-      }
-    }, 1500);
+    const win = window.open(url, "_blank", "noopener,noreferrer,width=800,height=600");
 
-    return () => clearTimeout(timer);
+    if (!win) {
+      window.location.href = url;
+    }
   }, []);
 
   return (
     <div
       style={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        textAlign: 'center',
-        padding: '20px',
+        textAlign: "center",
+        padding: "2rem",
+        fontFamily: "sans-serif",
+        color: "#462209",
       }}
     >
-      <h1 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>
-        Redirecionando para o WhatsApp...
-      </h1>
-      <p style={{ color: '#555' }}>
-        Se não for redirecionado,{' '}
-        <a
-          href="https://wa.me/5592993869080"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: 'blue', textDecoration: 'underline' }}
-        >
-          clique aqui
-        </a>.
-      </p>
+      Redirecionando para o WhatsApp...
     </div>
   );
 }
