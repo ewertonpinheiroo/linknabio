@@ -3,14 +3,12 @@ import { useEffect } from 'react';
 
 export default function RedirecionarWhatsApp() {
   useEffect(() => {
-    const redirecionar = () => {
-      // Redireciona após pequeno delay para evitar bloqueio
-      setTimeout(() => {
-        window.location.href = 'https://api.whatsapp.com/send/?phone=5592993669080&text&type=phone_number&app_absent=0';
-      }, 300); 
+    const abrirIntent = () => {
+      // A intenção aqui é forçar o Android a abrir o WhatsApp ou sugerir apps compatíveis
+      window.location.href = `intent://send/?phone=5592993669080#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end`;
     };
 
-    redirecionar();
+    setTimeout(abrirIntent, 300); // Pequeno delay
   }, []);
 
   return (
