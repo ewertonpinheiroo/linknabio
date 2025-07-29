@@ -3,10 +3,21 @@ import { useEffect } from 'react';
 
 export default function AbrirWhatsapp() {
   useEffect(() => {
+    const isWebView = () => {
+      const userAgent = window.navigator.userAgent.toLowerCase();
+      return userAgent.includes('webview') || userAgent.includes('tiktok');
+    };
+
     const timer = setTimeout(() => {
-      // Usa a Intent URL para forçar a abertura no WhatsApp
-      window.location.href = 'intent://send/+5592993869080#Intent;scheme=whatsapp;package=com.whatsapp;end';
+      if (isWebView()) {
+        // Tenta abrir diretamente o WhatsApp com Intent URL (Android)
+        window.location.href = 'intent://send/+5592993869080#Intent;scheme=whatsapp;package=com.whatsapp;end';
+      } else {
+        // Redireciona normalmente para outros navegadores
+        window.location.href = 'https://wa.me/5592993869080';
+      }
     }, 1500);
+
     return () => clearTimeout(timer);
   }, []);
 
