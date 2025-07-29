@@ -1,6 +1,20 @@
-import Image from "next/image";
+'use client';
+import Image from 'next/image';
+import { useEffect } from 'react';
 
 export default function Home() {
+  useEffect(() => {
+    const isWebView = () => {
+      const userAgent = window.navigator.userAgent.toLowerCase();
+      return userAgent.includes('webview') || userAgent.includes('tiktok');
+    };
+
+    if (isWebView()) {
+      // Redireciona para a mesma URL, mas força abertura no navegador padrão
+      window.location.href = 'https://astrologiadequintal.vercel.app/?openExternal=true';
+    }
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8 bg-[#f6d594]">
       <div className="flex flex-col items-center text-center">
