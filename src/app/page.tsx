@@ -58,7 +58,7 @@ export default function PaginaCompleta() {
       {/* Formulário */}
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-lg space-y-4 w-full max-w-md text-center mb-12">
         <h2 className="text-xl font-bold text-[#462209]">
-          Nosso atendimento chegará até você pelo WhatsApp.
+         Quer saber mais? Preencha os dados que o nosso atendimento chegará até você pelo WhatsApp.
         </h2>
 
         {enviado ? (
