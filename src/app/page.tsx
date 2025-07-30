@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Play, MessageCircle, Copy, Star, CheckCircle } from 'lucide-react';
 
 const imagens = [
@@ -32,6 +32,35 @@ const avaliacoes = [
 export default function Home() {
   const [currentDepoimentoIndex, setCurrentDepoimentoIndex] = useState(0);
   const [currentAvaliacaoIndex, setCurrentAvaliacaoIndex] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Ativar animação e scroll automático após componente montar
+  useEffect(() => {
+    // Primeiro ativa a animação com delay mais suave
+    const animationTimer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 600); // Delay maior para entrada mais suave
+
+    // Depois faz o scroll após garantir que tudo foi renderizado
+    const scrollTimer = setTimeout(() => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const botoesElement = document.getElementById('resumo');
+          if (botoesElement) {
+            botoesElement.scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'center'
+            });
+          }
+        });
+      });
+    }, 2000); // Mais tempo para a animação mais longa
+
+    return () => {
+      clearTimeout(animationTimer);
+      clearTimeout(scrollTimer);
+    };
+  }, []);
 
   const nextDepoimento = () => {
     setCurrentDepoimentoIndex((prev) => (prev + 1) % imagens.length);
@@ -133,7 +162,9 @@ export default function Home() {
             ></iframe>
           </div>
           
-          <div className="text-center">
+          <div 
+          id="meio"
+          className="text-center">
             <p className="text-[#462209] font-bold">
               👆 CLIQUE NO PLAY E VEJA COMO É FÁCIL! 👆
             </p>
@@ -142,18 +173,29 @@ export default function Home() {
       </div>
 
       {/* Explicação Simples */}
-      <div className="w-full max-w-lg mb-6 bg-white/30 rounded-xl p-4">
+      <div
+      id="resumo"
+      className="w-full max-w-lg mb-6 bg-white/30 rounded-xl p-4">
         <p className="text-[#462209] text-center font-medium">
           💡 <strong>Resumo:</strong> Após a página abrir no navegador externo
            clique no botão abaixo. Vai direto pro WhatsApp! 🚀
         </p>
       </div>
 
-      {/* Botões de Ação */}
-      <div className="w-full max-w-xs space-y-3 mb-8">
+      {/* Botões de Ação - COM ANIMAÇÃO SUAVIZADA E ID PARA SCROLL */}
+      <div 
+        id="botoes-acao"
+        className={`w-full max-w-xs space-y-3 mb-8 transition-all duration-1000 ease-out ${
+          isLoaded 
+            ? 'translate-y-0 opacity-100' 
+            : 'translate-y-4 opacity-0'
+        }`}
+        style={{
+          transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
+        }}
+      >
         <LinkButton
-          href="https://wa.me/5592993869080?text=Ol%C3%A1!%20Vim%20pelo%20TikTok%20e%20quero%20saber%20mais%20sobre%20os%20servi%C3%A7os.
-"
+          href="https://wa.me/5592993869080?text=Ol%C3%A1!%20Vim%20pelo%20TikTok%20e%20quero%20saber%20mais%20sobre%20os%20servi%C3%A7os."
           label="ATENDIMENTO WHATSAPP"
           subtitle="Clique aqui após abrir no navegador"
           icon={<MessageCircle className="w-5 h-5" />}
@@ -161,8 +203,7 @@ export default function Home() {
         />
         
         <CopyLinkButton
-          link="https://wa.me/5592993869080?text=Ol%C3%A1!%20Vim%20pelo%20TikTok%20e%20quero%20saber%20mais%20sobre%20os%20servi%C3%A7os.
-"
+          link="https://wa.me/5592993869080?text=Ol%C3%A1!%20Vim%20pelo%20TikTok%20e%20quero%20saber%20mais%20sobre%20os%20servi%C3%A7os."
           label="OU COPIAR LINK"
           subtitle="Para colar no navegador"
         />
