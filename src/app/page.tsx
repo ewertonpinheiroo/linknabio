@@ -152,7 +152,8 @@ export default function Home() {
       {/* Botões de Ação */}
       <div className="w-full max-w-xs space-y-3 mb-8">
         <LinkButton
-          href="https://api.whatsapp.com/send/?phone=5592993869080&text&type=phone_number&app_absent=0"
+          href="https://wa.me/5592993869080?text=Ol%C3%A1!%20Vim%20pelo%20TikTok%20e%20quero%20saber%20mais%20sobre%20os%20servi%C3%A7os.
+"
           label="ATENDIMENTO WHATSAPP"
           subtitle="Clique aqui após abrir no navegador"
           icon={<MessageCircle className="w-5 h-5" />}
@@ -160,7 +161,8 @@ export default function Home() {
         />
         
         <CopyLinkButton
-          link="https://api.whatsapp.com/send/?phone=5592993869080&text&type=phone_number&app_absent=0"
+          link="https://wa.me/5592993869080?text=Ol%C3%A1!%20Vim%20pelo%20TikTok%20e%20quero%20saber%20mais%20sobre%20os%20servi%C3%A7os.
+"
           label="OU COPIAR LINK"
           subtitle="Para colar no navegador"
         />
