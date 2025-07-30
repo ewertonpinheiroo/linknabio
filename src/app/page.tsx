@@ -96,7 +96,7 @@ export default function Home() {
           {[...Array(5)].map((_, i) => (
             <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
           ))}
-          <span className="text-[#462209] ml-2 font-semibold">4.9/5 (328 avaliações)</span>
+          <span className="text-[#462209] ml-2 font-semibold">5,0 (328 avaliações)</span>
         </div>
       </div>
 
