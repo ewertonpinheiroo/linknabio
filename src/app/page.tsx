@@ -45,7 +45,7 @@ export default function Home() {
     const scrollTimer = setTimeout(() => {
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          const botoesElement = document.getElementById('resumo');
+          const botoesElement = document.getElementById('botoes-acao');
           if (botoesElement) {
             botoesElement.scrollIntoView({ 
               behavior: 'smooth',
@@ -162,9 +162,7 @@ export default function Home() {
             ></iframe>
           </div>
           
-          <div 
-          id="meio"
-          className="text-center">
+          <div className="text-center">
             <p className="text-[#462209] font-bold">
               👆 CLIQUE NO PLAY E VEJA COMO É FÁCIL! 👆
             </p>
@@ -173,9 +171,7 @@ export default function Home() {
       </div>
 
       {/* Explicação Simples */}
-      <div
-      id="resumo"
-      className="w-full max-w-lg mb-6 bg-white/30 rounded-xl p-4">
+      <div className="w-full max-w-lg mb-6 bg-white/30 rounded-xl p-4">
         <p className="text-[#462209] text-center font-medium">
           💡 <strong>Resumo:</strong> Após a página abrir no navegador externo
            clique no botão abaixo. Vai direto pro WhatsApp! 🚀
