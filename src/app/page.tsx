@@ -125,7 +125,7 @@ export default function Home() {
           <div className="aspect-video mb-3">
             <iframe
               className="w-full h-full rounded-xl shadow-md border-2 border-[#462209]"
-              src="https://www.youtube.com/embed/10FQ9ctMS0w?si=po2BaiG3aj33kmC2"
+              src="https://www.youtube.com/embed/VdYrZsxc8Kw?si=2SHtG2e6t9UvXXHS"
               title="Como acessar o link do WhatsApp"
               frameBorder="0"
               allow="autoplay; encrypted-media"
