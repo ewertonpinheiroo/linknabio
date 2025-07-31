@@ -45,7 +45,7 @@ export default function Home() {
     const scrollTimer = setTimeout(() => {
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          const botoesElement = document.getElementById('botoes-acao');
+          const botoesElement = document.getElementById('resumo');
           if (botoesElement) {
             botoesElement.scrollIntoView({ 
               behavior: 'smooth',
@@ -162,7 +162,9 @@ export default function Home() {
             ></iframe>
           </div>
           
-          <div className="text-center">
+          <div 
+          id="meio"
+          className="text-center">
             <p className="text-[#462209] font-bold">
               👆 CLIQUE NO PLAY E VEJA COMO É FÁCIL! 👆
             </p>
@@ -171,7 +173,9 @@ export default function Home() {
       </div>
 
       {/* Explicação Simples */}
-      <div className="w-full max-w-lg mb-6 bg-white/30 rounded-xl p-4">
+      <div
+      id="resumo"
+      className="w-full max-w-lg mb-6 bg-white/30 rounded-xl p-4">
         <p className="text-[#462209] text-center font-medium">
           💡 <strong>Resumo:</strong> Após a página abrir no navegador externo
            clique no botão abaixo. Vai direto pro WhatsApp! 🚀
@@ -336,11 +340,23 @@ function LinkButton({
   icon?: React.ReactNode;
   primary?: boolean;
 }) {
+  // Função para enviar evento ao Google Analytics
+  const trackButtonClick = () => {
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "button_click", {
+        event_category: "Engagement",
+        event_label: label,
+        button_href: href,
+      });
+    }
+  };
+
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={trackButtonClick}
       className={`block px-6 py-4 rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-200 ${
         primary 
           ? 'bg-[#462209] text-[#f6d594] hover:bg-[#5c2e0d] border-2 border-[#462209]' 
