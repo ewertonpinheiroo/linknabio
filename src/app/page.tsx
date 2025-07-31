@@ -2,6 +2,13 @@
 import { useState, useEffect } from 'react';
 import { Play, MessageCircle, Copy, Star, CheckCircle } from 'lucide-react';
 
+// Declaração global para TypeScript
+declare global {
+  interface Window {
+    gtag: (...args: any[]) => void;
+  }
+}
+
 const imagens = [
   "https://i.pinimg.com/736x/7c/ca/5b/7cca5b730d137d6f7aff25e4eb8afcea.jpg",
   "https://i.pinimg.com/736x/71/79/35/717935c93814db4199c25e839d84ca73.jpg",
@@ -64,24 +71,69 @@ export default function Home() {
 
   const nextDepoimento = () => {
     setCurrentDepoimentoIndex((prev) => (prev + 1) % imagens.length);
+    
+    // Tracking para navegação nos depoimentos
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'testimonial_navigation', {
+        event_category: 'user_interaction',
+        event_label: 'next_testimonial',
+        transport_type: 'beacon'
+      });
+    }
   };
 
   const prevDepoimento = () => {
     setCurrentDepoimentoIndex((prev) => (prev - 1 + imagens.length) % imagens.length);
+    
+    // Tracking para navegação nos depoimentos
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'testimonial_navigation', {
+        event_category: 'user_interaction',
+        event_label: 'prev_testimonial',
+        transport_type: 'beacon'
+      });
+    }
   };
 
   const nextAvaliacao = () => {
     setCurrentAvaliacaoIndex((prev) => (prev + 1) % avaliacoes.length);
+    
+    // Tracking para navegação nas avaliações
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'review_navigation', {
+        event_category: 'user_interaction',
+        event_label: 'next_review',
+        transport_type: 'beacon'
+      });
+    }
   };
 
   const prevAvaliacao = () => {
     setCurrentAvaliacaoIndex((prev) => (prev - 1 + avaliacoes.length) % avaliacoes.length);
+    
+    // Tracking para navegação nas avaliações
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'review_navigation', {
+        event_category: 'user_interaction',
+        event_label: 'prev_review',
+        transport_type: 'beacon'
+      });
+    }
   };
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      
+      // Tracking para scroll para seções
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'scroll_to_section', {
+          event_category: 'navigation',
+          event_label: sectionId,
+          transport_type: 'beacon'
+        });
+      }
     }
   };
 
@@ -200,18 +252,33 @@ export default function Home() {
           subtitle="Clique aqui após abrir no navegador"
           icon={<MessageCircle className="w-5 h-5" />}
           primary={true}
+          trackingEvent={{
+            event_name: 'click_whatsapp_button',
+            event_category: 'engagement',
+            event_label: 'whatsapp_main_cta'
+          }}
         />
         
         <CopyLinkButton
           link="https://wa.me/5592993869080?text=Ol%C3%A1!%20Vim%20pelo%20TikTok%20e%20quero%20saber%20mais%20sobre%20os%20servi%C3%A7os."
           label="OU COPIAR LINK"
           subtitle="Para colar no navegador"
+          trackingEvent={{
+            event_name: 'copy_whatsapp_link',
+            event_category: 'engagement',
+            event_label: 'whatsapp_copy_link'
+          }}
         />
         
         <CopyNumberButton
           number="92993869080"
           label="COPIAR (92) 99386-9080"
           subtitle="Copiar o contato"
+          trackingEvent={{
+            event_name: 'copy_phone_number',
+            event_category: 'engagement',
+            event_label: 'phone_copy'
+          }}
         />
       </div>
 
@@ -332,19 +399,41 @@ function LinkButton({
   label,
   subtitle,
   icon,
-  primary = false
+  primary = false,
+  trackingEvent = null
 }: {
   href: string;
   label: string;
   subtitle: string;
   icon?: React.ReactNode;
   primary?: boolean;
+  trackingEvent?: {
+    event_name: string;
+    event_category: string;
+    event_label: string;
+  } | null;
 }) {
+  
+  const handleClick = () => {
+    // Enviar evento para Google Analytics
+    if (trackingEvent && typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', trackingEvent.event_name, {
+        event_category: trackingEvent.event_category,
+        event_label: trackingEvent.event_label,
+        transport_type: 'beacon'
+      });
+      
+      // Log para debug (remova em produção)
+      console.log('Evento GA enviado:', trackingEvent);
+    }
+  };
+
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={handleClick}
       className={`block px-6 py-4 rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-200 ${
         primary 
           ? 'bg-[#462209] text-[#f6d594] hover:bg-[#5c2e0d] border-2 border-[#462209]' 
@@ -365,11 +454,17 @@ function LinkButton({
 function CopyLinkButton({
   link,
   label,
-  subtitle
+  subtitle,
+  trackingEvent = null
 }: {
   link: string;
   label: string;
   subtitle: string;
+  trackingEvent?: {
+    event_name: string;
+    event_category: string;
+    event_label: string;
+  } | null;
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -377,6 +472,17 @@ function CopyLinkButton({
     navigator.clipboard.writeText(link);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+
+    // Enviar evento para Google Analytics
+    if (trackingEvent && typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', trackingEvent.event_name, {
+        event_category: trackingEvent.event_category,
+        event_label: trackingEvent.event_label,
+        transport_type: 'beacon'
+      });
+      
+      console.log('Evento GA enviado (copy link):', trackingEvent);
+    }
   };
 
   return (
@@ -400,11 +506,17 @@ function CopyLinkButton({
 function CopyNumberButton({
   number,
   label,
-  subtitle
+  subtitle,
+  trackingEvent = null
 }: {
   number: string;
   label: string;
   subtitle: string;
+  trackingEvent?: {
+    event_name: string;
+    event_category: string;
+    event_label: string;
+  } | null;
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -412,6 +524,17 @@ function CopyNumberButton({
     navigator.clipboard.writeText(number);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+
+    // Enviar evento para Google Analytics
+    if (trackingEvent && typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', trackingEvent.event_name, {
+        event_category: trackingEvent.event_category,
+        event_label: trackingEvent.event_label,
+        transport_type: 'beacon'
+      });
+      
+      console.log('Evento GA enviado (copy number):', trackingEvent);
+    }
   };
 
   return (
