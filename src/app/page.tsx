@@ -340,23 +340,11 @@ function LinkButton({
   icon?: React.ReactNode;
   primary?: boolean;
 }) {
-  // Função para enviar evento ao Google Analytics
-  const trackButtonClick = () => {
-    if (typeof window !== "undefined" && window.gtag) {
-      window.gtag("event", "button_click", {
-        event_category: "Engagement",
-        event_label: label,
-        button_href: href,
-      });
-    }
-  };
-
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={trackButtonClick}
       className={`block px-6 py-4 rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-200 ${
         primary 
           ? 'bg-[#462209] text-[#f6d594] hover:bg-[#5c2e0d] border-2 border-[#462209]' 
