@@ -42,32 +42,18 @@ export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   // Ativar animação e scroll automático após componente montar
+   // Apenas ativa a animação de entrada
   useEffect(() => {
-    // Primeiro ativa a animação com delay mais suave
     const animationTimer = setTimeout(() => {
       setIsLoaded(true);
-    }, 600); // Delay maior para entrada mais suave
-
-    // Depois faz o scroll após garantir que tudo foi renderizado
-    const scrollTimer = setTimeout(() => {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          const botoesElement = document.getElementById('resumo');
-          if (botoesElement) {
-            botoesElement.scrollIntoView({ 
-              behavior: 'smooth',
-              block: 'center'
-            });
-          }
-        });
-      });
-    }, 2000); // Mais tempo para a animação mais longa
+    }, 600);
 
     return () => {
       clearTimeout(animationTimer);
-      clearTimeout(scrollTimer);
     };
-  }, []);
+  }, [])
+
+   
 
   const nextDepoimento = () => {
     setCurrentDepoimentoIndex((prev) => (prev + 1) % imagens.length);
